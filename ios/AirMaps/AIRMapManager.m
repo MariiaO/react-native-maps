@@ -28,6 +28,7 @@
 #import "AIRMapSnapshot.h"
 #import "RCTConvert+AirMap.h"
 #import "AIRMapOverlay.h"
+#import "AIRMapShapeOverlay.h"
 #import <MapKit/MapKit.h>
 
 static NSString *const RCTMapViewKey = @"MapView";
@@ -668,6 +669,22 @@ RCT_EXPORT_METHOD(getAddressFromCoordinates:(nonnull NSNumber *)reactTag
             }
         }
 
+        if ([overlay isKindOfClass:[AIRMapShapeOverlay class]]) {
+            AIRMapShapeOverlay *overlay = (AIRMapShapeOverlay*) overlay;
+            if (MKMapRectContainsPoint(overlay.mapRect, mapPoint)) {
+                if (overlay.onPress) {
+                    id event = @{
+                                 @"action": @"image-overlay-press",
+                                 @"name": overlay.name ?: @"unknown",
+                                 @"coordinate": @{
+                                         @"latitude": @(overlay.coordinate.latitude),
+                                         @"longitude": @(overlay.coordinate.longitude)
+                                         }
+                                 };
+                    overlay.onPress(event);
+                }
+            }
+        }
     }
 
     if (nearestDistance <= maxMeters) {
@@ -770,6 +787,8 @@ RCT_EXPORT_METHOD(getAddressFromCoordinates:(nonnull NSNumber *)reactTag
         return ((AIRMapCircle *)overlay).renderer;
     } else if ([overlay isKindOfClass:[AIRMapUrlTile class]]) {
         return ((AIRMapUrlTile *)overlay).renderer;
+    } else if ([overlay isKindOfClass:[AIRMapShapeOverlay class]]) {
+        return ((AIRMapShapeOverlay *)overlay).renderer;
     } else if ([overlay isKindOfClass:[AIRMapWMSTile class]]) {
         return ((AIRMapWMSTile *)overlay).renderer;
     } else if ([overlay isKindOfClass:[AIRMapLocalTile class]]) {

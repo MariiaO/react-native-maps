@@ -20,6 +20,7 @@
 #import "AIRMapWMSTile.h"
 #import "AIRMapLocalTile.h"
 #import "AIRMapOverlay.h"
+#import "AIRMapShapeOverlay.h"
 
 const CLLocationDegrees AIRMapDefaultSpan = 0.005;
 const NSTimeInterval AIRMapRegionChangeObserveInterval = 0.1;
@@ -118,7 +119,10 @@ const NSInteger AIRMapMaxZoomLevel = 20;
     } else if ([subview isKindOfClass:[AIRMapUrlTile class]]) {
         ((AIRMapUrlTile *)subview).map = self;
         [self addOverlay:(id<MKOverlay>)subview];
-    }else if ([subview isKindOfClass:[AIRMapWMSTile class]]) {
+    } else if ([subview isKindOfClass:[AIRMapShapeOverlay class]]) {
+        ((AIRMapShapeOverlay *)subview).map = self;
+        [self addOverlay:(id<MKOverlay>)subview];
+    } else if ([subview isKindOfClass:[AIRMapWMSTile class]]) {
         ((AIRMapWMSTile *)subview).map = self;
         [self addOverlay:(id<MKOverlay>)subview];
     } else if ([subview isKindOfClass:[AIRMapLocalTile class]]) {
@@ -151,6 +155,9 @@ const NSInteger AIRMapMaxZoomLevel = 20;
     } else if ([subview isKindOfClass:[AIRMapCircle class]]) {
         [self removeOverlay:(id <MKOverlay>) subview];
     } else if ([subview isKindOfClass:[AIRMapUrlTile class]]) {
+        [self removeOverlay:(id <MKOverlay>) subview];
+    } else if ([subview isKindOfClass:[AIRMapShapeOverlay class]]) {
+        [((AIRMapShapeOverlay *)subview) recycle];
         [self removeOverlay:(id <MKOverlay>) subview];
     } else if ([subview isKindOfClass:[AIRMapWMSTile class]]) {
         [self removeOverlay:(id <MKOverlay>) subview];
