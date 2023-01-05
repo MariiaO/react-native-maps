@@ -105,7 +105,7 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
   private final Map<Marker, AirMapMarker> markerMap = new HashMap<>();
   private final Map<Polyline, AirMapPolyline> polylineMap = new HashMap<>();
   private final Map<Polygon, AirMapPolygon> polygonMap = new HashMap<>();
-  private final Map<GroundOverlay, AirMapOverlay> overlayMap = new HashMap<>();
+  private final Map<GroundOverlay, AirMapFeature> overlayMap = new HashMap<>();
   private final Map<TileOverlay, AirMapHeatmap> heatmapMap = new HashMap<>();
   private final Map<TileOverlay, AirMapGradientPolyline> gradientPolylineMap = new HashMap<>();
   private final GestureDetectorCompat gestureDetector;
@@ -337,7 +337,15 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       public void onGroundOverlayClick(GroundOverlay groundOverlay) {
         WritableMap event = makeClickEventData(groundOverlay.getPosition());
         event.putString("action", "overlay-press");
-        manager.pushEvent(context, overlayMap.get(groundOverlay), "onPress", event);
+
+        AirMapFeature feature = overlayMap.get(groundOverlay);
+        if (feature instanceof AirMapOverlay) {
+          AirMapOverlay overlayFeature = (AirMapOverlay) feature;
+          manager.pushEvent(context, overlayFeature, "onPress", event);
+        } else if (feature instanceof AirMapShapeOverlay) {
+          AirMapShapeOverlay shapeOverlayFeature = (AirMapShapeOverlay) feature;
+          manager.pushEvent(context, shapeOverlayFeature, "onPress", event);
+        }
       }
     });
 
@@ -680,6 +688,12 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
 
       Marker marker = (Marker) annotation.getFeature();
       markerMap.put(marker, annotation);
+    } else if (child instanceof AirMapShapeOverlay) {
+      AirMapShapeOverlay shapeOverlay = (AirMapShapeOverlay) child;
+      shapeOverlay.addToMap(map);
+      features.add(index, shapeOverlay);
+      GroundOverlay groundOverlay = (GroundOverlay) shapeOverlay.getFeature();
+      overlayMap.put(groundOverlay, shapeOverlay);
     } else if (child instanceof AirMapPolyline) {
       AirMapPolyline polylineView = (AirMapPolyline) child;
       polylineView.addToMap(map);
@@ -710,6 +724,10 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       AirMapWMSTile urlTileView = (AirMapWMSTile) child;
       urlTileView.addToMap(map);
       features.add(index, urlTileView);
+    } else if (child instanceof AirMapShapeTile) {
+      AirMapShapeTile shapeTileView = (AirMapShapeTile) child;
+      shapeTileView.addToMap(map);
+      features.add(index, shapeTileView);
     } else if (child instanceof AirMapLocalTile) {
       AirMapLocalTile localTileView = (AirMapLocalTile) child;
       localTileView.addToMap(map);
@@ -731,6 +749,10 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       for (int i = 0; i < children.getChildCount(); i++) {
         addFeature(children.getChildAt(i), index);
       }
+    } else if (child instanceof AirMapShapeTile) {
+      AirMapShapeTile shapeTileView = (AirMapShapeTile) child;
+      shapeTileView.addToMap(map);
+      features.add(index, shapeTileView);
     } else {
       addView(child, index);
     }
@@ -750,6 +772,8 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       markerMap.remove(feature.getFeature());
     } else if (feature instanceof AirMapHeatmap) {
       heatmapMap.remove(feature.getFeature());
+    } else if (feature instanceof AirMapShapeOverlay) {
+      overlayMap.remove(feature.getFeature());
     }
     feature.removeFromMap(map);
   }
