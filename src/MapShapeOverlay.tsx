@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 // import PropTypes from 'prop-types';
 import {
   // View,
@@ -68,7 +68,7 @@ import decorateMapComponent, {
 
 export type MapOverlayProps = ViewProps;
 
-export class MapShapeOverlay extends Component<MapOverlayProps> {
+export class MapShapeOverlay extends React.Component<MapOverlayProps> {
   static Animated: Animated.AnimatedComponent<typeof MapShapeOverlay>;
   getNativeComponent!: () => NativeComponent<MapOverlayProps>;
 
