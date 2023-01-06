@@ -44,7 +44,6 @@ public class MapsPackage implements ReactPackage {
     AirMapLocalTileManager localTileManager = new AirMapLocalTileManager(reactContext);
     AirMapOverlayManager overlayManager = new AirMapOverlayManager(reactContext);
     AirMapShapeOverlayManager shapeOverlayManager = new AirMapShapeOverlayManager();
-    AirMapShapeTileManager shapeTileManager = new AirMapShapeTileManager(reactContext);
     AirMapHeatmapManager heatmapManager = new AirMapHeatmapManager();
     mapManager.setMarkerManager(annotationManager);
 
@@ -62,8 +61,7 @@ public class MapsPackage implements ReactPackage {
         localTileManager,
         overlayManager,
         heatmapManager,
-        shapeOverlayManager,
-        shapeTileManager
+        shapeOverlayManager
     );
   }
 }

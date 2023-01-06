@@ -37,7 +37,6 @@ export type {MapCalloutSubviewProps} from './MapCalloutSubview';
 export {default as AnimatedRegion} from './AnimatedRegion';
 export {default as Geojson} from './Geojson';
 export {default as ShapeOverlay} from './MapShapeOverlay';
-export {default as ShapeTile} from './MapShapeTile';
 export type {GeojsonProps} from './Geojson';
 
 export {Marker, Overlay};

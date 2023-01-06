@@ -1,2 +1,0 @@
-declare const _default: typeof import("./MapCallout").MapCallout | typeof import("./MapCalloutSubview").MapCalloutSubview | typeof import("./MapCircle").MapCircle | typeof import("./MapHeatmap").MapHeatmap | typeof import("./MapLocalTile").MapLocalTile | typeof import("./MapMarker").MapMarker | typeof import("./MapOverlay").MapOverlay | typeof import("./MapPolygon").MapPolygon | typeof import("./MapPolyline").MapPolyline | typeof import("./MapUrlTile").MapUrlTile | typeof import("./MapWMSTile").MapWMSTile;
-export default _default;

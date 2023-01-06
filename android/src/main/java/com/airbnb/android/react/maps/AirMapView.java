@@ -724,10 +724,6 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       AirMapWMSTile urlTileView = (AirMapWMSTile) child;
       urlTileView.addToMap(map);
       features.add(index, urlTileView);
-    } else if (child instanceof AirMapShapeTile) {
-      AirMapShapeTile shapeTileView = (AirMapShapeTile) child;
-      shapeTileView.addToMap(map);
-      features.add(index, shapeTileView);
     } else if (child instanceof AirMapLocalTile) {
       AirMapLocalTile localTileView = (AirMapLocalTile) child;
       localTileView.addToMap(map);
@@ -749,10 +745,6 @@ public class AirMapView extends MapView implements GoogleMap.InfoWindowAdapter,
       for (int i = 0; i < children.getChildCount(); i++) {
         addFeature(children.getChildAt(i), index);
       }
-    } else if (child instanceof AirMapShapeTile) {
-      AirMapShapeTile shapeTileView = (AirMapShapeTile) child;
-      shapeTileView.addToMap(map);
-      features.add(index, shapeTileView);
     } else {
       addView(child, index);
     }

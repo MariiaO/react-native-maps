@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 // import PropTypes from 'prop-types';
 import {
   // View,
-  // StyleSheet,
+  StyleSheet,
   Animated,
   // ViewPropTypes,
 } from 'react-native';
@@ -71,7 +71,7 @@ class MapShapeOverlay extends Component {
     return (
       <AIRMapShapeOverlay
         {...this.props}
-        // style={[styles.overlay, this.props.style]}
+        style={[styles.overlay, this.props.style]}
       />
     );
   }
@@ -81,13 +81,12 @@ class MapShapeOverlay extends Component {
 MapShapeOverlay.defaultProps = defaultProps;
 MapShapeOverlay.viewConfig = viewConfig;
 
-// const styles = StyleSheet.create({
-//   overlay: {
-//     position: 'absolute',
-//     backgroundColor: 'transparent',
-
-//   },
-// });
+const styles = StyleSheet.create({
+  overlay: {
+    position: 'absolute',
+    backgroundColor: 'transparent',
+  },
+});
 
 MapShapeOverlay.Animated = Animated.createAnimatedComponent(MapShapeOverlay);
 
