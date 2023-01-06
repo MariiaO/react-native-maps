@@ -11,6 +11,7 @@
     "lint": "eslint . --max-warnings 0",
     "tscheck": "tsc --noEmit",
     "build": "tsc --project tsconfig.build.json",
+    "postinstall": "tsc --project tsconfig.build.json",
     "test": "jest",
     "prepare": "husky install",
     "release": "semantic-release",
