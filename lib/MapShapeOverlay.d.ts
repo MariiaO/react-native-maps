@@ -1,2 +1,11 @@
-declare const _default: typeof import("./MapCallout").MapCallout | typeof import("./MapCalloutSubview").MapCalloutSubview | typeof import("./MapCircle").MapCircle | typeof import("./MapHeatmap").MapHeatmap | typeof import("./MapLocalTile").MapLocalTile | typeof import("./MapMarker").MapMarker | typeof import("./MapOverlay").MapOverlay | typeof import("./MapPolygon").MapPolygon | typeof import("./MapPolyline").MapPolyline | typeof import("./MapUrlTile").MapUrlTile | typeof import("./MapWMSTile").MapWMSTile;
+import { Component } from 'react';
+import { Animated, ViewProps } from 'react-native';
+import { NativeComponent } from './decorateMapComponent';
+export declare type MapOverlayProps = ViewProps;
+export declare class MapShapeOverlay extends Component<MapOverlayProps> {
+    static Animated: Animated.AnimatedComponent<typeof MapShapeOverlay>;
+    getNativeComponent: () => NativeComponent<MapOverlayProps>;
+    render(): JSX.Element;
+}
+declare const _default: typeof MapShapeOverlay;
 export default _default;

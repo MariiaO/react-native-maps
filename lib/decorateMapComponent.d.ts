@@ -12,6 +12,7 @@ import { MapPolygon } from './MapPolygon';
 import { MapPolyline } from './MapPolyline';
 import { MapUrlTile } from './MapUrlTile';
 import { MapWMSTile } from './MapWMSTile';
+import { MapShapeOverlay } from './MapShapeOverlay';
 export declare const SUPPORTED: ImplementationStatus;
 export declare const USES_DEFAULT_IMPLEMENTATION: ImplementationStatus;
 export declare const NOT_SUPPORTED: ImplementationStatus;
@@ -30,6 +31,6 @@ declare type Providers = {
 export declare type UIManagerCommand = number;
 export declare type MapManagerCommand = any;
 export declare type NativeComponent<H = unknown> = HostComponent<H> | ReturnType<typeof createNotSupportedComponent>;
-declare type Component = typeof MapCallout | typeof MapCalloutSubview | typeof MapCircle | typeof MapHeatmap | typeof MapLocalTile | typeof MapMarker | typeof MapOverlay | typeof MapPolygon | typeof MapPolyline | typeof MapUrlTile | typeof MapWMSTile;
-declare type ComponentName = 'Callout' | 'CalloutSubview' | 'Circle' | 'Heatmap' | 'LocalTile' | 'Marker' | 'Overlay' | 'Polygon' | 'Polyline' | 'UrlTile' | 'WMSTile';
+declare type Component = typeof MapCallout | typeof MapCalloutSubview | typeof MapCircle | typeof MapHeatmap | typeof MapLocalTile | typeof MapMarker | typeof MapOverlay | typeof MapPolygon | typeof MapPolyline | typeof MapUrlTile | typeof MapWMSTile | typeof MapShapeOverlay;
+declare type ComponentName = 'Callout' | 'CalloutSubview' | 'Circle' | 'Heatmap' | 'LocalTile' | 'Marker' | 'Overlay' | 'Polygon' | 'Polyline' | 'UrlTile' | 'WMSTile' | 'ShapeOverlay';
 export {};

@@ -4,29 +4,30 @@ import {
   // View,
   StyleSheet,
   Animated,
-  // ViewPropTypes,
+  ViewProps,
 } from 'react-native';
 
 import decorateMapComponent, {
+  NativeComponent,
   SUPPORTED,
   USES_DEFAULT_IMPLEMENTATION,
 } from './decorateMapComponent';
 
-const viewConfig = {
-  uiViewClassName: 'AIR<provider>MapPathOverlay',
-  validAttributes: {
-    shape: true,
-  },
-};
+// const viewConfig = {
+//   uiViewClassName: 'AIR<provider>MapPathOverlay',
+//   validAttributes: {
+//     shape: true,
+//   },
+// };
 
-const defaultProps = {
-  name: '',
-  rotation: 0,
-  scale: 2.0,
-  zIndex: 0,
-  transparency: 0.0,
-  onPress: () => {},
-};
+// const defaultProps = {
+//   name: '',
+//   rotation: 0,
+//   scale: 2.0,
+//   zIndex: 0,
+//   transparency: 0.0,
+//   onPress: () => {},
+// };
 
 // const propTypes = {
 //   // ...ViewPropTypes,
@@ -65,7 +66,12 @@ const defaultProps = {
 //   onPress: PropTypes.func,
 // };
 
-class MapShapeOverlay extends Component {
+export type MapOverlayProps = ViewProps;
+
+export class MapShapeOverlay extends Component<MapOverlayProps> {
+  static Animated: Animated.AnimatedComponent<typeof MapShapeOverlay>;
+  getNativeComponent!: () => NativeComponent<MapOverlayProps>;
+
   render() {
     const AIRMapShapeOverlay = this.getNativeComponent();
     return (
@@ -78,8 +84,8 @@ class MapShapeOverlay extends Component {
 }
 
 // MapShapeOverlay.propTypes = propTypes;
-MapShapeOverlay.defaultProps = defaultProps;
-MapShapeOverlay.viewConfig = viewConfig;
+// MapShapeOverlay.defaultProps = defaultProps;
+// MapShapeOverlay.viewConfig = viewConfig;
 
 const styles = StyleSheet.create({
   overlay: {

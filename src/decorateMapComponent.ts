@@ -19,6 +19,7 @@ import {MapPolygon} from './MapPolygon';
 import {MapPolyline} from './MapPolyline';
 import {MapUrlTile} from './MapUrlTile';
 import {MapWMSTile} from './MapWMSTile';
+import {MapShapeOverlay} from './MapShapeOverlay';
 
 export const SUPPORTED: ImplementationStatus = 'SUPPORTED';
 export const USES_DEFAULT_IMPLEMENTATION: ImplementationStatus =
@@ -164,7 +165,8 @@ type Component =
   | typeof MapPolygon
   | typeof MapPolyline
   | typeof MapUrlTile
-  | typeof MapWMSTile;
+  | typeof MapWMSTile
+  | typeof MapShapeOverlay;
 
 type ComponentName =
   | 'Callout'
@@ -177,4 +179,5 @@ type ComponentName =
   | 'Polygon'
   | 'Polyline'
   | 'UrlTile'
-  | 'WMSTile';
+  | 'WMSTile'
+  | 'ShapeOverlay';
